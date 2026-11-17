@@ -1,0 +1,2226 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#071923">
+<title>EV Vocabulary Practice — Workplace Writing II</title>
+
+<style>
+/* ========================================
+   BASE
+======================================== */
+:root {
+    color-scheme: dark;
+    --bg: #071923;
+    --panel: #122f3b;
+    --panel-light: #193d49;
+    --line: #365965;
+    --text: #ecf9f6;
+    --muted: #a1bdc5;
+    --green: #97f2b6;
+    --cyan: #73e3ed;
+    --orange: #ffca90;
+}
+
+* { box-sizing: border-box; }
+
+html {
+    scroll-padding-top: 18px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: Arial, "Microsoft JhengHei", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    overflow-wrap: break-word;
+}
+
+button, input { font: inherit; }
+
+button {
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+}
+
+button:disabled { cursor: default; }
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+.hidden { display: none !important; }
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ========================================
+   BACKGROUND
+======================================== */
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 10% 0%, #35ce9c17, transparent 50%),
+        radial-gradient(ellipse at 95% 90%, #4fc8e61a, transparent 50%);
+}
+
+.background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(#93e3cf06 1px, transparent 1px),
+        linear-gradient(90deg, #93e3cf06 1px, transparent 1px);
+    background-size: 65px 65px;
+}
+
+.emoji {
+    position: absolute;
+    bottom: -90px;
+    opacity: 0;
+    animation: rise linear infinite;
+}
+
+@keyframes rise {
+    0% {
+        transform: translate(0, 0) rotate(-8deg);
+        opacity: 0;
+    }
+    15% { opacity: .12; }
+    80% { opacity: .1; }
+    100% {
+        transform: translate(var(--drift), -125vh) rotate(14deg);
+        opacity: 0;
+    }
+}
+
+body.practising .emoji { filter: opacity(.3); }
+body.motion-off .emoji { animation-play-state: paused; visibility: hidden; }
+
+/* ========================================
+   LAYOUT
+======================================== */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1060px;
+    width: 100%;
+    margin: auto;
+    padding: 24px 18px 60px;
+    padding-left: max(18px, env(safe-area-inset-left));
+    padding-right: max(18px, env(safe-area-inset-right));
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 0 24px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.brand span { color: var(--green); }
+
+.header-label {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.page { display: none; min-width: 0; }
+.page.active { display: block; }
+
+.hero {
+    text-align: center;
+    padding: 20px 0 30px;
+}
+
+.hero-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border: 1px solid #97f2b655;
+    border-radius: 23px;
+    background: #97f2b610;
+    font-size: 35px;
+}
+
+.eyebrow {
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-top: 23px;
+}
+
+h1 {
+    margin: 15px 0;
+    font-size: clamp(35px, 7vw, 72px);
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+}
+
+h1 span {
+    background: linear-gradient(110deg, var(--green), var(--cyan));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.course {
+    color: #d2e7ea;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.hero-note {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.chips {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 20px;
+}
+
+.chip {
+    border: 1px solid var(--line);
+    background: #122f3bbd;
+    border-radius: 100px;
+    padding: 8px 12px;
+    color: #b9d2d9;
+    font-size: 12px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.mode-card {
+    min-width: 0;
+    text-align: left;
+    padding: 24px;
+    border-radius: 23px;
+    border: 1px solid var(--line);
+    background: linear-gradient(140deg, #193b47ed, #102935ed);
+    color: var(--text);
+    transition: transform .2s, border-color .2s;
+}
+
+.mode-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.mode-icon { font-size: 30px; }
+
+.mode-number {
+    color: var(--green);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.mode-card h2 { margin: 20px 0 12px; font-size: 23px; }
+
+.mode-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.mode-meta {
+    color: var(--cyan);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.mode-link {
+    margin-top: 22px;
+    font-size: 12px;
+    color: var(--green);
+    font-weight: 800;
+}
+
+.menu-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 2;
+}
+
+.text-button {
+    background: none;
+    border: 0;
+    padding: 9px;
+    color: var(--cyan);
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.back,
+.small-button {
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    background: #14313de8;
+    color: #d8edef;
+    padding: 11px 16px;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: normal;
+}
+
+.station-tag {
+    color: var(--green);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+}
+
+.exercise-heading {
+    padding: 25px;
+    border-radius: 23px;
+    background: #122f3bed;
+    border: 1px solid var(--line);
+    margin-bottom: 20px;
+}
+
+.exercise-heading h2 {
+    margin: 0 0 12px;
+    font-size: clamp(24px, 4vw, 35px);
+}
+
+.instructions {
+    color: #c5dce0;
+    font-size: 14px;
+    line-height: 1.9;
+    margin: 0;
+}
+
+.progress-row {
+    display: flex;
+    justify-content: space-between;
+    color: #b7d1d6;
+    font-size: 11px;
+    margin-top: 18px;
+    gap: 10px;
+}
+
+.progress-track {
+    margin-top: 9px;
+    height: 8px;
+    border-radius: 100px;
+    background: #294751;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+    transition: width .2s;
+}
+
+/* ========================================
+   WORD USAGE
+======================================== */
+.practice-section {
+    border: 1px solid var(--line);
+    border-radius: 21px;
+    padding: 23px;
+    background: #102b37f5;
+    margin-bottom: 19px;
+    min-width: 0;
+    scroll-margin-top: 15px;
+}
+
+.section-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.section-top h3 {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.section-badge {
+    padding: 6px 10px;
+    border: 1px solid #5de2eb44;
+    color: var(--cyan);
+    border-radius: 100px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.bank-label {
+    color: #b0cdd4;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+.word-bank {
+    padding: 14px;
+    border: 1px solid #375d62;
+    border-radius: 15px;
+    background: #0b212b;
+    margin-bottom: 14px;
+}
+
+.bank-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.word {
+    max-width: 100%;
+    padding: 10px 14px;
+    border-radius: 100px;
+    background: #1b3c48;
+    color: #e3f6ee;
+    border: 1px solid #4b7479;
+    font-size: 15px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+    line-height: 1.4;
+}
+
+.word.selected {
+    background: var(--green);
+    color: #0b2b20;
+    border-color: var(--green);
+    box-shadow: 0 0 15px #97f2b622;
+}
+
+.word.used {
+    color: #93aeb7;
+    border-style: dashed;
+    background: #132b35;
+    text-decoration: line-through;
+}
+
+.sentence-row {
+    padding: 17px 0;
+    border-bottom: 1px solid #33515c77;
+    font-size: 16px;
+    scroll-margin-top: 20px;
+}
+
+.sentence-row:last-of-type { border-bottom: 0; }
+
+.sentence-text {
+    line-height: 2.6;
+    overflow-wrap: anywhere;
+}
+
+.question-number {
+    color: #9cbcc5;
+    font-size: 12px;
+    margin-right: 6px;
+}
+
+.blank {
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 125px;
+    max-width: 100%;
+    min-height: 44px;
+    padding: 6px 12px;
+    margin: 3px 4px;
+    border: 1px dashed #75b3b5;
+    border-radius: 9px;
+    background: #1b3c48;
+    color: var(--cyan);
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.blank.filled { border-style: solid; color: #e4f8ec; }
+.blank.correct { border-color: var(--green); background: #194e3c; }
+.blank.incorrect { border-color: var(--orange); background: #523f30; }
+
+.row-feedback {
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 7px;
+    overflow-wrap: anywhere;
+}
+
+.row-feedback:empty { display: none; }
+.row-feedback.good { color: var(--green); }
+.row-feedback.bad { color: var(--orange); }
+
+.selection-status {
+    min-height: 44px;
+    color: var(--green);
+    font-size: 13px;
+    margin: 0 0 4px;
+    line-height: 1.7;
+}
+
+.section-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 17px;
+}
+
+/* ========================================
+   MULTIPLE CHOICE
+======================================== */
+.question-card {
+    background: #112d39f5;
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 19px;
+    margin-bottom: 16px;
+    min-width: 0;
+    scroll-margin-top: 20px;
+}
+
+.question-text {
+    margin: 0 0 17px;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.options { display: grid; gap: 11px; }
+
+.option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-height: 52px;
+    padding: 14px;
+    border: 1px solid #3a5d69;
+    border-radius: 12px;
+    background: #183744;
+    cursor: pointer;
+    line-height: 1.65;
+    font-size: 16px;
+}
+
+.option input {
+    width: 19px;
+    height: 19px;
+    margin: 3px 0 0;
+    flex-shrink: 0;
+    accent-color: #6ce0aa;
+}
+
+.option span { min-width: 0; overflow-wrap: anywhere; }
+.option.selected { border-color: var(--cyan); background: #204653; }
+.option.correct { border-color: var(--green); background: #194d3b; }
+.option.incorrect { border-color: var(--orange); background: #503d2f; }
+
+.mc-feedback {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.mc-feedback.good {
+    background: #97f2b012;
+    color: #b4f7c9;
+    border: 1px solid #97f2b044;
+}
+
+.mc-feedback.bad {
+    background: #ffca9010;
+    color: #ffdab3;
+    border: 1px solid #ffca9044;
+}
+
+/* ========================================
+   ACTIONS
+======================================== */
+.action-panel {
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #122f3bf5;
+    margin: 24px 0;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.primary,
+.secondary {
+    min-height: 48px;
+    border-radius: 13px;
+    padding: 13px 18px;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: .3px;
+    line-height: 1.6;
+    white-space: normal;
+}
+
+.primary {
+    color: #0a2c1f;
+    border: 1px solid var(--green);
+    background: var(--green);
+}
+
+.secondary {
+    color: #d6ebee;
+    border: 1px solid #50727c;
+    background: #1b3b48;
+}
+
+.score {
+    margin-top: 17px;
+    padding: 16px;
+    border: 1px solid #97f2b055;
+    border-radius: 13px;
+    color: var(--green);
+    background: #97f2b00c;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.7;
+    scroll-margin-top: 20px;
+}
+
+.score small {
+    display: block;
+    font-size: 13px;
+    color: #b3d2d3;
+    font-weight: 400;
+    margin-top: 6px;
+}
+
+.bottom-note {
+    color: #b1cbd2;
+    font-size: 12px;
+    line-height: 1.9;
+    margin-top: 14px;
+}
+
+.top-link { display: block; margin: 20px auto 0; }
+
+.mobile-dock { display: none; }
+
+/* ========================================
+   HOVER DEVICES
+======================================== */
+@media (hover: hover) {
+    .mode-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--green);
+    }
+
+    .back:hover,
+    .small-button:hover,
+    .option:hover { border-color: var(--green); }
+
+    .word:not(.used):hover { border-color: var(--green); }
+}
+
+/* ========================================
+   TABLET / MOBILE
+======================================== */
+@media (max-width: 760px) {
+    .container {
+        padding-top: 15px;
+        padding-bottom: calc(110px + env(safe-area-inset-bottom));
+        padding-left: max(13px, env(safe-area-inset-left));
+        padding-right: max(13px, env(safe-area-inset-right));
+    }
+
+    .menu-grid { grid-template-columns: 1fr; gap: 13px; }
+    .mode-card { padding: 21px; }
+    .mode-card h2 { margin-top: 13px; }
+    .mode-card p { margin: 10px 0; }
+    .mode-link { margin-top: 14px; }
+
+    .exercise-heading,
+    .practice-section,
+    .question-card { padding: 19px 16px; }
+
+    .header-label { font-size: 9px; }
+    .hero { padding-top: 12px; }
+    .sentence-row { font-size: 16px; }
+    .blank { min-width: 112px; }
+    .word { font-size: 15px; padding: 10px 13px; }
+
+    .mobile-dock {
+        position: fixed;
+        z-index: 10;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+        grid-template-columns: 1fr 1.25fr 1fr;
+        align-items: stretch;
+        gap: 8px;
+        padding: 10px 12px;
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+        padding-bottom: calc(10px + env(safe-area-inset-bottom));
+        background: #0b222df5;
+        border-top: 1px solid #42636f;
+        box-shadow: 0 -7px 25px #0004;
+    }
+
+    body.practising .mobile-dock { display: grid; }
+
+    .mobile-dock button {
+        border-radius: 11px;
+        min-height: 48px;
+        padding: 9px 5px;
+        font-size: 11px;
+        line-height: 1.5;
+        font-weight: 800;
+    }
+
+    .dock-secondary {
+        background: #193946;
+        color: #e1f0f0;
+        border: 1px solid #456671;
+    }
+
+    .dock-primary {
+        background: var(--green);
+        color: #0a2c1f;
+        border: 1px solid var(--green);
+    }
+}
+
+@media (max-width: 420px) {
+    .action-buttons { flex-direction: column; }
+    .action-buttons button { width: 100%; }
+    .section-actions { display: grid; grid-template-columns: 1fr 1fr; }
+    .small-button { padding: 10px 8px; font-size: 11px; }
+    .exercise-heading,
+    .practice-section,
+    .question-card { padding: 17px 13px; }
+    .word-bank { padding: 12px; }
+    .bank-buttons { gap: 8px; }
+    .station-tag { font-size: 9px; }
+}
+
+@media (max-width: 340px) {
+    .site-header { align-items: flex-start; flex-direction: column; gap: 8px; }
+    .toolbar { align-items: flex-start; flex-direction: column; }
+    .word { padding: 10px 11px; font-size: 14px; }
+    .blank { min-width: 100px; }
+    h1 { font-size: 33px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .emoji { display: none; }
+    .mode-card, .progress-fill { transition: none; }
+}
+</style>
+</head>
+
+<body>
+<div id="background" class="background" aria-hidden="true"></div>
+
+<div class="container">
+    <header class="site-header">
+        <div class="brand">YOUTH <span>COLLEGE</span></div>
+        <div class="header-label">EV LEARNING STATION</div>
+    </header>
+
+    <!-- MENU -->
+    <main id="menu" class="page active">
+        <div class="hero">
+            <div class="hero-icon" aria-hidden="true">🔌</div>
+            <div class="eyebrow">WORKPLACE WRITING II</div>
+            <h1>EV <span>VOCAB PRACTICE</span></h1>
+
+            <p class="course">
+                Vocational English 2D<br>
+                Integrated Assessment · Vocabulary Building
+            </p>
+
+            <p class="hero-note">
+                Put your vocabulary into action.<br>
+                Build your language power.
+            </p>
+
+            <div class="chips">
+                <span class="chip">62 vocabulary entries</span>
+                <span class="chip">New practice contexts</span>
+                <span class="chip">Tap-friendly exercises</span>
+            </div>
+        </div>
+
+        <div class="menu-grid">
+            <button class="mode-card" onclick="showPage('ex1')">
+                <div class="mode-top">
+                    <span class="mode-icon" aria-hidden="true">🔋</span>
+                    <span class="mode-number">STATION 01</span>
+                </div>
+                <h2>Word Usage</h2>
+                <p>Tap a word, then tap a gap to complete each sentence.</p>
+                <div id="menu-ex1-count" class="mode-meta"></div>
+                <div class="mode-link">BUILD YOUR WORD POWER →</div>
+            </button>
+
+            <button class="mode-card" onclick="showPage('ex2')">
+                <div class="mode-top">
+                    <span class="mode-icon" aria-hidden="true">⚡</span>
+                    <span class="mode-number">STATION 02</span>
+                </div>
+                <h2>Active or Passive?</h2>
+                <p>Decide whether the subject does or receives the action.</p>
+                <div id="menu-ex2-count" class="mode-meta"></div>
+                <div class="mode-link">CONNECT THE GRAMMAR →</div>
+            </button>
+
+            <button class="mode-card" onclick="showPage('ex3')">
+                <div class="mode-top">
+                    <span class="mode-icon" aria-hidden="true">🚗</span>
+                    <span class="mode-number">STATION 03</span>
+                </div>
+                <h2>Verb Forms</h2>
+                <p>Choose the correct verb form to complete each sentence.</p>
+                <div id="menu-ex3-count" class="mode-meta"></div>
+                <div class="mode-link">DRIVE YOUR SKILLS FORWARD →</div>
+            </button>
+        </div>
+
+        <div class="menu-footer">
+            Your answers stay in place when you return to this menu.<br>
+            Refreshing or closing this page will clear them.<br>
+
+            <button id="motion-button" class="text-button"
+                    onclick="toggleMotion()" aria-pressed="false">
+                Pause background animation
+            </button>
+        </div>
+    </main>
+
+    <!-- EXERCISE 1 -->
+    <section id="ex1" class="page" aria-labelledby="ex1-title">
+        <div class="toolbar">
+            <button class="back" onclick="showPage('menu')">← BACK TO MENU</button>
+            <span class="station-tag">STATION 01 · WORD USAGE</span>
+        </div>
+
+        <div class="exercise-heading">
+            <h2 id="ex1-title" tabindex="-1">Word Usage</h2>
+
+            <p class="instructions">
+                Tap a word, then tap a gap in the same section.
+                Use each word once, exactly as shown.<br>
+                To remove an answer, tap its gap when no word is selected.
+                To replace it, select another word first.
+            </p>
+
+            <div class="progress-row">
+                <span>GAPS COMPLETED</span>
+                <span id="ex1-progress-text">0 / 62</span>
+            </div>
+
+            <div class="progress-track" role="progressbar"
+                 id="ex1-progressbar" aria-label="Gaps completed"
+                 aria-valuemin="0" aria-valuemax="62" aria-valuenow="0">
+                <div id="ex1-progress" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div id="word-sections"></div>
+
+        <div class="action-panel">
+            <div class="action-buttons">
+                <button class="primary" onclick="checkAllWords(true)">CHECK ALL ANSWERS</button>
+                <button class="secondary" onclick="jumpToNext()">NEXT UNANSWERED</button>
+                <button class="secondary" onclick="resetAllWords()">RESET ALL</button>
+            </div>
+
+            <div id="ex1-score" class="score hidden" aria-live="polite"></div>
+
+            <div class="bottom-note">
+                Some words appear twice with different parts of speech.
+                Read the whole sentence before answering.
+            </div>
+        </div>
+
+        <button class="back top-link" onclick="goTop()">↑ BACK TO TOP</button>
+    </section>
+
+    <!-- EXERCISE 2 -->
+    <section id="ex2" class="page" aria-labelledby="ex2-title">
+        <div class="toolbar">
+            <button class="back" onclick="showPage('menu')">← BACK TO MENU</button>
+            <span class="station-tag">STATION 02 · ACTIVE / PASSIVE</span>
+        </div>
+
+        <div class="exercise-heading">
+            <h2 id="ex2-title" tabindex="-1">Active or Passive?</h2>
+
+            <p class="instructions">
+                Choose the correct answer. Does the subject perform the
+                action or receive it? Read the time expressions too.
+            </p>
+
+            <div class="progress-row">
+                <span>QUESTIONS ANSWERED</span>
+                <span id="ex2-progress-text"></span>
+            </div>
+
+            <div class="progress-track" role="progressbar"
+                 id="ex2-progressbar" aria-label="Questions answered"
+                 aria-valuemin="0" aria-valuemax="12" aria-valuenow="0">
+                <div id="ex2-progress" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div id="ex2-questions"></div>
+
+        <div class="action-panel">
+            <div class="action-buttons">
+                <button class="primary" onclick="checkMC('ex2', true)">CHECK ANSWERS</button>
+                <button class="secondary" onclick="jumpToNext()">NEXT UNANSWERED</button>
+                <button class="secondary" onclick="resetMC('ex2')">RESET &amp; RESHUFFLE</button>
+            </div>
+
+            <div id="ex2-score" class="score hidden" aria-live="polite"></div>
+        </div>
+
+        <button class="back top-link" onclick="goTop()">↑ BACK TO TOP</button>
+    </section>
+
+    <!-- EXERCISE 3 -->
+    <section id="ex3" class="page" aria-labelledby="ex3-title">
+        <div class="toolbar">
+            <button class="back" onclick="showPage('menu')">← BACK TO MENU</button>
+            <span class="station-tag">STATION 03 · VERB FORMS</span>
+        </div>
+
+        <div class="exercise-heading">
+            <h2 id="ex3-title" tabindex="-1">Verb Forms</h2>
+
+            <p class="instructions">
+                Choose the correct verb form. Pay attention to modal verbs,
+                infinitives and words followed by the -ing form.
+            </p>
+
+            <div class="progress-row">
+                <span>QUESTIONS ANSWERED</span>
+                <span id="ex3-progress-text"></span>
+            </div>
+
+            <div class="progress-track" role="progressbar"
+                 id="ex3-progressbar" aria-label="Questions answered"
+                 aria-valuemin="0" aria-valuemax="16" aria-valuenow="0">
+                <div id="ex3-progress" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div id="ex3-questions"></div>
+
+        <div class="action-panel">
+            <div class="action-buttons">
+                <button class="primary" onclick="checkMC('ex3', true)">CHECK ANSWERS</button>
+                <button class="secondary" onclick="jumpToNext()">NEXT UNANSWERED</button>
+                <button class="secondary" onclick="resetMC('ex3')">RESET &amp; RESHUFFLE</button>
+            </div>
+
+            <div id="ex3-score" class="score hidden" aria-live="polite"></div>
+        </div>
+
+        <button class="back top-link" onclick="goTop()">↑ BACK TO TOP</button>
+    </section>
+</div>
+
+<!-- MOBILE BOTTOM CONTROLS -->
+<nav class="mobile-dock" aria-label="Exercise controls">
+    <button class="dock-secondary" onclick="showPage('menu')">← MENU</button>
+    <button class="dock-primary" onclick="checkCurrent()">CHECK ALL</button>
+    <button class="dock-secondary" onclick="jumpToNext()">NEXT GAP ↓</button>
+</nav>
+
+<div id="announcement" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+<script>
+"use strict";
+
+/* ========================================
+   VOCABULARY: ALL 62 ENTRIES
+======================================== */
+const wordGroups = [
+    {
+        title: "Everyday Services",
+        pos: "Nouns",
+        items: [
+            {
+                word: "bill", meaning: "帳單",
+                sentence: "The waiter brought our ___ after we finished dinner."
+            },
+            {
+                word: "connectivity", meaning: "網絡連接／連線狀況",
+                sentence: "Poor internet ___ made the video call difficult to follow."
+            },
+            {
+                word: "cost", meaning: "費用／成本",
+                sentence: "The total ___ of the holiday was $4,000 per person."
+            },
+            {
+                word: "demand", meaning: "需求",
+                sentence: "The bakery makes more cakes at weekends to keep up with customer ___."
+            },
+            {
+                word: "discussion", meaning: "討論",
+                sentence: "After a long ___, the committee agreed on a date."
+            }
+        ]
+    },
+    {
+        title: "Buildings and Equipment",
+        pos: "Nouns",
+        items: [
+            {
+                word: "electricity", meaning: "電力",
+                sentence: "This small island uses wind turbines to generate ___."
+            },
+            {
+                word: "engineer", meaning: "工程師",
+                sentence: "A structural ___ examined the damaged roof."
+            },
+            {
+                word: "expansion", meaning: "擴充／擴建",
+                sentence: "The museum's ___ will double its exhibition space."
+            },
+            {
+                word: "feasibility", meaning: "可行性",
+                sentence: "The report examines the ___ of turning the old school into a hostel."
+            },
+            {
+                word: "feature", meaning: "功能",
+                sentence: "The automatic translation ___ makes this app easier to use."
+            }
+        ]
+    },
+    {
+        title: "Projects and Organisation",
+        pos: "Nouns",
+        items: [
+            {
+                word: "figures", meaning: "數字／數據",
+                sentence: "The accountant entered the monthly sales ___ into a spreadsheet."
+            },
+            {
+                word: "funding", meaning: "資金／經費",
+                sentence: "The youth centre applied for ___ to run free music lessons."
+            },
+            {
+                word: "image", meaning: "形象",
+                sentence: "The rude advertisement damaged the restaurant's public ___."
+            },
+            {
+                word: "installation", meaning: "安裝／裝設",
+                sentence: "Professional ___ of the new windows is included in the price."
+            },
+            {
+                word: "interruptions", meaning: "中斷",
+                sentence: "The speaker asked everyone to save questions until the end to prevent ___."
+            }
+        ]
+    },
+    {
+        title: "Problems and Choices",
+        pos: "Nouns",
+        items: [
+            {
+                word: "maintenance", meaning: "維修及保養",
+                sentence: "The swimming pool closes every Monday for cleaning and ___."
+            },
+            {
+                word: "need", meaning: "需要／需求",
+                sentence: "The flood created an urgent ___ for temporary housing."
+            },
+            {
+                word: "option", meaning: "選項／方案",
+                sentence: "If the ferry is cancelled, taking a bus is another ___."
+            },
+            {
+                word: "overload", meaning: "超負荷／過載",
+                sentence: "Plugging too many heaters into one socket may cause an electrical ___."
+            },
+            {
+                word: "power", meaning: "電力",
+                sentence: "A backup generator supplies ___ to the hospital during a blackout."
+            }
+        ]
+    },
+    {
+        title: "Information and Safety",
+        pos: "Nouns",
+        items: [
+            {
+                word: "queue", meaning: "輪候隊伍／車龍",
+                sentence: "Passengers formed a ___ beside the taxi stand."
+            },
+            {
+                word: "record", meaning: "紀錄",
+                sentence: "The school keeps a ___ of each student's attendance."
+            },
+            {
+                word: "review", meaning: "檢視／審視",
+                sentence: "The factory carried out a full ___ of its emergency procedures."
+            },
+            {
+                word: "risk", meaning: "風險",
+                sentence: "Wearing suitable shoes lowers the ___ of slipping."
+            },
+            {
+                word: "survey", meaning: "調查／問卷調查",
+                sentence: "A customer ___ asked shoppers to rate the store from one to five."
+            }
+        ]
+    },
+    {
+        title: "Digital Life and Opinions",
+        pos: "Nouns",
+        items: [
+            {
+                word: "update", meaning: "更新",
+                sentence: "Download the latest security ___ before opening the program."
+            },
+            {
+                word: "usage", meaning: "使用情況／使用量",
+                sentence: "My phone sends an alert when my monthly data ___ reaches 10 GB."
+            },
+            {
+                word: "view", meaning: "看法／意見",
+                sentence: "In my ___, the new opening hours are more convenient."
+            }
+        ]
+    },
+    {
+        title: "Planning and Communication",
+        pos: "Verbs",
+        items: [
+            {
+                word: "avoid", meaning: "避免",
+                sentence: "Wear gloves to ___ direct contact with the cleaning liquid."
+            },
+            {
+                word: "collect", meaning: "收集",
+                sentence: "Volunteers will ___ warm clothes for families in need."
+            },
+            {
+                word: "confirm", meaning: "確認／確定",
+                sentence: "Please ___ whether you will attend the dinner."
+            },
+            {
+                word: "constrain", meaning: "限制／制約",
+                sentence: "Tight deadlines can ___ a designer's freedom to experiment."
+            },
+            {
+                word: "control", meaning: "控制／調控",
+                sentence: "This remote lets you ___ the brightness of the lamp."
+            }
+        ]
+    },
+    {
+        title: "Thinking and Investigation",
+        pos: "Verbs",
+        items: [
+            {
+                word: "discuss", meaning: "討論／商討",
+                sentence: "We will ___ the class trip at tomorrow's meeting."
+            },
+            {
+                word: "disrupt", meaning: "干擾／妨礙正常運作",
+                sentence: "Unexpected roadworks may ___ the bus service."
+            },
+            {
+                word: "explore", meaning: "探討／研究",
+                sentence: "The researchers want to ___ new methods of recycling fabric."
+            },
+            {
+                word: "gather", meaning: "收集／搜集",
+                sentence: "Before writing the article, the journalist must ___ reliable evidence."
+            },
+            {
+                word: "guide", meaning: "為……提供指引／依據",
+                sentence: "The results of the trial will ___ our next decision."
+            }
+        ]
+    },
+    {
+        title: "Tasks and Requirements",
+        pos: "Verbs",
+        items: [
+            {
+                word: "limit", meaning: "限制",
+                sentence: "Parents can ___ access to certain websites."
+            },
+            {
+                word: "meet", meaning: "滿足／應付",
+                sentence: "The new playground must ___ the needs of younger children."
+            },
+            {
+                word: "need", meaning: "需要",
+                sentence: "You will ___ a valid passport for the journey."
+            },
+            {
+                word: "record", meaning: "記錄",
+                sentence: "Use this table to ___ the height of each plant."
+            }
+        ]
+    },
+    {
+        title: "Changes and Processes",
+        pos: "Verbs",
+        items: [
+            {
+                word: "reduce", meaning: "減少／降低",
+                sentence: "Better packaging can ___ the amount of food damaged in transport."
+            },
+            {
+                word: "review", meaning: "檢視／審視",
+                sentence: "The manager will ___ the complaint before responding."
+            },
+            {
+                word: "rise", meaning: "上升／增加",
+                sentence: "The river level may ___ after tonight's heavy rain."
+            },
+            {
+                word: "slow", meaning: "使……減慢",
+                sentence: "A missing document could ___ the approval process."
+            }
+        ]
+    },
+    {
+        title: "Practical Solutions",
+        pos: "Verbs",
+        items: [
+            {
+                word: "store", meaning: "儲存",
+                sentence: "You can ___ digital copies of your certificates in this folder."
+            },
+            {
+                word: "strengthen", meaning: "加強／提升",
+                sentence: "Regular practice can ___ your presentation skills."
+            },
+            {
+                word: "suit", meaning: "適合／切合……的需要",
+                sentence: "Would an evening appointment ___ your schedule better?"
+            },
+            {
+                word: "support", meaning: "支援／兼容",
+                sentence: "This media player can ___ several audio formats."
+            }
+        ]
+    },
+    {
+        title: "Resources and Arrangements",
+        pos: "Adjectives",
+        items: [
+            {
+                word: "available", meaning: "可用的／可供使用的",
+                sentence: "No seats are ___ on the morning flight."
+            },
+            {
+                word: "charging", meaning: "充電的／用作充電的",
+                sentence: "Place the wireless mouse on its ___ pad overnight."
+            },
+            {
+                word: "departmental", meaning: "部門的",
+                sentence: "Each team leader must attend the monthly ___ briefing."
+            },
+            {
+                word: "extra", meaning: "額外的",
+                sentence: "Please bring an ___ towel in case the first one gets wet."
+            }
+        ]
+    },
+    {
+        title: "Plans and Travel",
+        pos: "Adjectives",
+        items: [
+            {
+                word: "future", meaning: "未來的／日後的",
+                sentence: "Keep these documents for ___ reference."
+            },
+            {
+                word: "helpful", meaning: "有幫助的／有用的",
+                sentence: "The tutor was very ___ when I had questions."
+            },
+            {
+                word: "initial", meaning: "最初的／初期的",
+                sentence: "The police made an ___ assessment before starting a full investigation."
+            },
+            {
+                word: "off-peak", meaning: "非繁忙時段的",
+                sentence: "The gym offers a cheaper ___ membership for visits before 4 p.m."
+            }
+        ]
+    },
+    {
+        title: "Services and Payments",
+        pos: "Adjectives",
+        items: [
+            {
+                word: "peak-hour", meaning: "繁忙時段的／高峰時段的",
+                sentence: "The railway adds ___ trains for the morning rush."
+            },
+            {
+                word: "popular", meaning: "受歡迎的",
+                sentence: "The comedy show is especially ___ among teenagers."
+            },
+            {
+                word: "upfront", meaning: "前期的／開始時須支付的",
+                sentence: "The supplier asks for an ___ deposit before starting production."
+            },
+            {
+                word: "useful", meaning: "有用的／有幫助的",
+                sentence: "A pocket dictionary is a ___ tool for language learners."
+            }
+        ]
+    }
+];
+
+/* ========================================
+   ACTIVE / PASSIVE
+   Correct answer is options[0].
+======================================== */
+const voiceQuestions = [
+    {
+        text: "The museum team ___ visitor comments at the end of every tour.",
+        options: ["collects", "is collected", "collecting"],
+        explanation: "The team performs the action. Use the active present simple: collects. 「團隊」係收集意見嘅一方；team 喺呢度視為一個整體。"
+    },
+    {
+        text: "All visitor comments ___ by a staff member at the end of every tour.",
+        options: ["are collected", "collect", "is collecting"],
+        explanation: "The comments receive the action. Use are collected because comments is plural. 意見係「被收集」，所以用被動語態。"
+    },
+    {
+        text: "Our assistant ___ the workshop booking yesterday.",
+        options: ["confirmed", "was confirmed", "confirming"],
+        explanation: "The assistant performed the action yesterday. Use the active past simple: confirmed. 助理係確認預約嘅一方。"
+    },
+    {
+        text: "The workshop booking ___ by our assistant yesterday.",
+        options: ["was confirmed", "confirmed", "were confirmed"],
+        explanation: "The booking received the action. Use was confirmed because booking is singular and the action happened yesterday. 預約係「被確認」。"
+    },
+    {
+        text: "Every morning, the nurse ___ each patient's temperature.",
+        options: ["records", "is recorded", "recording"],
+        explanation: "The nurse performs the action regularly. Use records. 主語 nurse 係第三人稱單數。"
+    },
+    {
+        text: "Each patient's temperature ___ in this chart every morning.",
+        options: ["is recorded", "records", "are recorded"],
+        explanation: "Temperature receives the action and is singular. Use is recorded. 體溫係「被記錄」。"
+    },
+    {
+        text: "The receptionist ___ all lost property in a locked cupboard.",
+        options: ["stores", "is stored", "storing"],
+        explanation: "The receptionist performs the action. Use stores. 接待員係存放失物嘅一方。"
+    },
+    {
+        text: "All lost property ___ in a locked cupboard.",
+        options: ["is stored", "stores", "are storing"],
+        explanation: "Lost property receives the action. Property is uncountable here, so use is stored. 失物係「被存放」。"
+    },
+    {
+        text: "At yesterday's meeting, the committee ___ the school's lunch policy.",
+        options: ["reviewed", "was reviewed", "reviewing"],
+        explanation: "The committee performed the action at a completed past meeting. Use reviewed. 委員會係檢視政策嘅一方。"
+    },
+    {
+        text: "The school's lunch policy ___ at yesterday's meeting.",
+        options: ["was reviewed", "reviewed", "were reviewed"],
+        explanation: "The policy received the action. Use was reviewed: singular subject + past passive. 政策係「被檢視」。"
+    },
+    {
+        text: "The technician ___ the projector with a handheld remote.",
+        options: ["controls", "is controlled", "controlling"],
+        explanation: "The technician performs the action. Use controls. 技術員係控制投影機嘅一方。"
+    },
+    {
+        text: "The projector ___ by a handheld remote.",
+        options: ["is controlled", "controls", "are controlled"],
+        explanation: "The projector receives the action. Use is controlled. 投影機係「被控制」。"
+    }
+];
+
+/* ========================================
+   VERB FORMS
+======================================== */
+const formQuestions = [
+    {
+        text: "All visitors must ___ at reception before entering the building.",
+        options: ["register", "to register", "registering"],
+        explanation: "After must, use the base form: must register. 情態動詞後面用動詞原形。"
+    },
+    {
+        text: "We should ___ the opening times before leaving.",
+        options: ["confirm", "to confirm", "confirmed"],
+        explanation: "Should + base form: should confirm. should 後面唔加 to，亦唔用過去式。"
+    },
+    {
+        text: "The school hopes ___ its links with local businesses.",
+        options: ["to strengthen", "strengthen", "strengthening"],
+        explanation: "Hope is followed by a to-infinitive: hopes to strengthen. 常用句式係 hope to do something。"
+    },
+    {
+        text: "Please avoid ___ the lesson with unnecessary noise.",
+        options: ["disrupting", "to disrupt", "disrupt"],
+        explanation: "Avoid is followed by an -ing form: avoid disrupting. avoid 後面用動名詞。"
+    },
+    {
+        text: "The team can ___ the results in a shared folder.",
+        options: ["store", "to store", "stored"],
+        explanation: "Can + base form: can store. can 後面用動詞原形。"
+    },
+    {
+        text: "We need ___ the number of spare chairs.",
+        options: ["to limit", "limit", "limiting"],
+        explanation: "When need is a main verb, use need to + base form: need to limit. 呢度 need 後面接 to-infinitive。"
+    },
+    {
+        text: "By ___ accurate measurements, we can compare the samples.",
+        options: ["recording", "record", "to record"],
+        explanation: "After the preposition by, use an -ing form: by recording. by doing something 表示「透過做某事」。"
+    },
+    {
+        text: "The researchers plan ___ further evidence before publishing the report.",
+        options: ["to gather", "gather", "gathering"],
+        explanation: "Plan is followed by a to-infinitive: plan to gather. 常用句式係 plan to do something。"
+    },
+    {
+        text: "We installed a handrail in order ___ the risk of falls.",
+        options: ["to reduce", "reduce", "reducing"],
+        explanation: "Use in order to + base form to express purpose. 表示目的時用 in order to reduce。"
+    },
+    {
+        text: "The children finished ___ their observations before lunch.",
+        options: ["recording", "to record", "record"],
+        explanation: "Finish is followed by an -ing form: finished recording. finish 後面用動名詞。"
+    },
+    {
+        text: "The manager suggested ___ the seating arrangement.",
+        options: ["reviewing", "to review", "review"],
+        explanation: "Use suggest + -ing: suggested reviewing. 呢個句式唔用 suggested to review。"
+    },
+    {
+        text: "The organisers decided ___ the practical problems first.",
+        options: ["to discuss", "discuss", "discussing"],
+        explanation: "Decide is followed by a to-infinitive: decided to discuss. decide 後面接 to do。"
+    },
+    {
+        text: "You may ___ a different size if this jacket is too tight.",
+        options: ["need", "to need", "needing"],
+        explanation: "May + base form: may need. may 係情態動詞，後面用原形。"
+    },
+    {
+        text: "We are interested in ___ other ways to organise the event.",
+        options: ["exploring", "explore", "to explore"],
+        explanation: "In is a preposition, so use exploring. 介詞 in 後面用動名詞。"
+    },
+    {
+        text: "The designer worked carefully so as ___ the client's requirements.",
+        options: ["to meet", "meet", "meeting"],
+        explanation: "Use so as to + base form to express purpose: so as to meet. 呢度 meet 解作「滿足」。"
+    },
+    {
+        text: "The new software is capable of ___ more file types.",
+        options: ["supporting", "support", "to support"],
+        explanation: "Of is a preposition, so use supporting. capable of supporting 解作「能夠支援」。"
+    }
+];
+
+/* ========================================
+   HELPERS / STATE
+======================================== */
+const $ = id => document.getElementById(id);
+
+function shuffle(items) {
+    const result = [...items];
+
+    for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+    }
+
+    return result;
+}
+
+const totalWords = wordGroups.reduce(
+    (sum, group) => sum + group.items.length, 0
+);
+
+const wordState = wordGroups.map(group => ({
+    answers: Array(group.items.length).fill(null),
+    selected: null,
+    checked: false,
+    bankOrder: shuffle(group.items.map((_, index) => index))
+}));
+
+const mcData = { ex2: voiceQuestions, ex3: formQuestions };
+
+const mcState = {
+    ex2: { selected: [], order: [], checked: [] },
+    ex3: { selected: [], order: [], checked: [] }
+};
+
+let currentPage = "menu";
+const savedScroll = { menu: 0, ex1: 0, ex2: 0, ex3: 0 };
+
+function showPage(id) {
+    savedScroll[currentPage] = window.scrollY;
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.toggle("active", page.id === id);
+    });
+
+    currentPage = id;
+    document.body.classList.toggle("practising", id !== "menu");
+
+    requestAnimationFrame(() => {
+        window.scrollTo(0, savedScroll[id] || 0);
+    });
+}
+
+function goTop() {
+    window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+function announce(text) {
+    $("announcement").textContent = text;
+}
+
+function revealElement(element, focusTarget) {
+    element.scrollIntoView({ block: "start", behavior: "auto" });
+
+    if (focusTarget) {
+        try {
+            focusTarget.focus({ preventScroll: true });
+        } catch (error) {
+            focusTarget.focus();
+        }
+    }
+}
+
+/* ========================================
+   BACKGROUND
+======================================== */
+let motionPaused = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
+
+function initBackground() {
+    const emojis = ["🚗", "🚙", "🔋", "⚡", "🔌", "🌱"];
+    const count = window.matchMedia("(max-width: 760px)").matches ? 6 : 12;
+
+    for (let i = 0; i < count; i++) {
+        const emoji = document.createElement("span");
+
+        emoji.className = "emoji";
+        emoji.textContent = emojis[i % emojis.length];
+        emoji.style.left = (Math.random() * 94) + "%";
+        emoji.style.fontSize = (23 + Math.random() * 15) + "px";
+        emoji.style.animationDuration = (30 + Math.random() * 20) + "s";
+        emoji.style.animationDelay = (-Math.random() * 48) + "s";
+        emoji.style.setProperty("--drift", (-50 + Math.random() * 100) + "px");
+
+        $("background").appendChild(emoji);
+    }
+
+    updateMotion();
+}
+
+function updateMotion() {
+    document.body.classList.toggle("motion-off", motionPaused);
+
+    $("motion-button").textContent = motionPaused
+        ? "Resume background animation"
+        : "Pause background animation";
+
+    $("motion-button").setAttribute("aria-pressed", String(motionPaused));
+}
+
+function toggleMotion() {
+    motionPaused = !motionPaused;
+    updateMotion();
+}
+
+/* ========================================
+   WORD USAGE: BUILD ONCE
+======================================== */
+function buildWordSections() {
+    const container = $("word-sections");
+    let questionOffset = 0;
+
+    wordGroups.forEach((group, groupIndex) => {
+        const section = document.createElement("section");
+        section.className = "practice-section";
+        section.id = `word-group-${groupIndex}`;
+
+        const top = document.createElement("div");
+        top.className = "section-top";
+
+        const title = document.createElement("h3");
+        title.textContent = `${groupIndex + 1}. ${group.title}`;
+
+        const badge = document.createElement("span");
+        badge.className = "section-badge";
+        badge.textContent = group.pos;
+
+        top.append(title, badge);
+        section.appendChild(top);
+
+        const bank = document.createElement("div");
+        bank.className = "word-bank";
+
+        const bankLabel = document.createElement("div");
+        bankLabel.className = "bank-label";
+        bankLabel.textContent = "WORD BANK · USE EACH WORD ONCE";
+
+        const buttons = document.createElement("div");
+        buttons.className = "bank-buttons";
+        buttons.id = `bank-${groupIndex}`;
+
+        wordState[groupIndex].bankOrder.forEach(itemIndex => {
+            buttons.appendChild(createWordButton(groupIndex, itemIndex));
+        });
+
+        bank.append(bankLabel, buttons);
+        section.appendChild(bank);
+
+        const status = document.createElement("div");
+        status.id = `selection-${groupIndex}`;
+        status.className = "selection-status";
+        status.setAttribute("aria-live", "polite");
+        section.appendChild(status);
+
+        group.items.forEach((item, itemIndex) => {
+            const row = document.createElement("div");
+            row.className = "sentence-row";
+            row.id = `word-row-${groupIndex}-${itemIndex}`;
+
+            const sentence = document.createElement("div");
+            sentence.className = "sentence-text";
+
+            const number = document.createElement("span");
+            number.className = "question-number";
+            number.textContent = `${questionOffset + itemIndex + 1}.`;
+
+            const parts = item.sentence.split("___");
+
+            const blank = document.createElement("button");
+            blank.type = "button";
+            blank.id = `blank-${groupIndex}-${itemIndex}`;
+            blank.className = "blank";
+            blank.onclick = () => fillGap(groupIndex, itemIndex);
+
+            sentence.append(
+                number,
+                document.createTextNode(parts[0]),
+                blank,
+                document.createTextNode(parts[1] || "")
+            );
+
+            const feedback = document.createElement("div");
+            feedback.id = `word-feedback-${groupIndex}-${itemIndex}`;
+            feedback.className = "row-feedback";
+
+            row.append(sentence, feedback);
+            section.appendChild(row);
+        });
+
+        const actions = document.createElement("div");
+        actions.className = "section-actions";
+
+        const check = document.createElement("button");
+        check.className = "small-button";
+        check.textContent = "CHECK SECTION";
+        check.onclick = () => checkWordSection(groupIndex);
+
+        const reset = document.createElement("button");
+        reset.className = "small-button";
+        reset.textContent = "RESET SECTION";
+        reset.onclick = () => resetWordSection(groupIndex, true);
+
+        actions.append(check, reset);
+        section.appendChild(actions);
+        container.appendChild(section);
+
+        questionOffset += group.items.length;
+        renderWordSection(groupIndex);
+    });
+
+    updateWordProgress();
+}
+
+function createWordButton(groupIndex, itemIndex) {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.id = `word-${groupIndex}-${itemIndex}`;
+    button.className = "word";
+    button.textContent = wordGroups[groupIndex].items[itemIndex].word;
+    button.onclick = () => selectWord(groupIndex, itemIndex);
+
+    return button;
+}
+
+/* Update existing nodes to preserve touch focus and layout. */
+function renderWordSection(groupIndex) {
+    const group = wordGroups[groupIndex];
+    const state = wordState[groupIndex];
+
+    group.items.forEach((item, itemIndex) => {
+        const button = $(`word-${groupIndex}-${itemIndex}`);
+        const used = state.answers.includes(itemIndex);
+
+        button.classList.toggle("selected", state.selected === itemIndex);
+        button.classList.toggle("used", used);
+
+        // Keep used words focusable; clicking one explains how to move it.
+        button.setAttribute("aria-disabled", String(used));
+        button.setAttribute("aria-pressed", String(state.selected === itemIndex));
+
+        button.setAttribute(
+            "aria-label",
+            item.word + (used ? ", already used" : "")
+        );
+    });
+
+    $(`selection-${groupIndex}`).textContent = state.selected === null
+        ? "Select a word, then tap a gap in this section."
+        : `Selected: ${group.items[state.selected].word}. Now tap a gap.`;
+
+    group.items.forEach((item, itemIndex) => {
+        const answerIndex = state.answers[itemIndex];
+        const blank = $(`blank-${groupIndex}-${itemIndex}`);
+        const feedback = $(`word-feedback-${groupIndex}-${itemIndex}`);
+
+        blank.className = "blank" + (answerIndex !== null ? " filled" : "");
+
+        blank.textContent = answerIndex === null
+            ? "________"
+            : group.items[answerIndex].word;
+
+        blank.setAttribute(
+            "aria-label",
+            `Section ${groupIndex + 1}, gap ${itemIndex + 1}: ` +
+            (answerIndex === null ? "empty" : group.items[answerIndex].word)
+        );
+
+        feedback.className = "row-feedback";
+        feedback.textContent = "";
+
+        if (state.checked) {
+            if (answerIndex === itemIndex) {
+                blank.classList.add("correct");
+                feedback.classList.add("good");
+                feedback.textContent = `Correct — ${item.word}: ${item.meaning}`;
+            } else {
+                blank.classList.add("incorrect");
+                feedback.classList.add("bad");
+                feedback.textContent =
+                    `${answerIndex === null ? "Not answered." : "Not quite."} ` +
+                    `Answer: ${item.word} — ${item.meaning}`;
+            }
+        }
+    });
+}
+
+function invalidateWordScore() {
+    $("ex1-score").classList.add("hidden");
+}
+
+function selectWord(groupIndex, itemIndex) {
+    const state = wordState[groupIndex];
+
+    if (state.answers.includes(itemIndex)) {
+        $(`selection-${groupIndex}`).textContent =
+            "This word is already used. Deselect any selected word, " +
+            "then tap its filled gap to return it to the bank.";
+        return;
+    }
+
+    state.selected = state.selected === itemIndex ? null : itemIndex;
+
+    if (state.checked) {
+        state.checked = false;
+        invalidateWordScore();
+    }
+
+    renderWordSection(groupIndex);
+}
+
+function fillGap(groupIndex, gapIndex) {
+    const state = wordState[groupIndex];
+
+    if (state.selected !== null) {
+        state.answers[gapIndex] = state.selected;
+        state.selected = null;
+    } else if (state.answers[gapIndex] !== null) {
+        state.answers[gapIndex] = null;
+    } else {
+        $(`selection-${groupIndex}`).textContent =
+            "Choose a word from the word bank above first.";
+        return;
+    }
+
+    state.checked = false;
+    invalidateWordScore();
+    renderWordSection(groupIndex);
+    updateWordProgress();
+}
+
+function updateWordProgress() {
+    const answered = wordState.reduce(
+        (sum, state) =>
+            sum + state.answers.filter(answer => answer !== null).length,
+        0
+    );
+
+    $("ex1-progress-text").textContent = `${answered} / ${totalWords}`;
+    $("ex1-progress").style.width = (answered / totalWords * 100) + "%";
+    $("ex1-progressbar").setAttribute("aria-valuenow", String(answered));
+}
+
+function checkWordSection(groupIndex) {
+    const state = wordState[groupIndex];
+    state.checked = true;
+    state.selected = null;
+
+    renderWordSection(groupIndex);
+
+    const correct = state.answers.filter((answer, index) => answer === index).length;
+
+    announce(
+        `Section ${groupIndex + 1}: ${correct} out of ` +
+        `${state.answers.length} correct. Feedback is below each sentence.`
+    );
+}
+
+function checkAllWords(scrollToScore = false) {
+    let correct = 0;
+    let answered = 0;
+
+    wordState.forEach((state, groupIndex) => {
+        state.checked = true;
+        state.selected = null;
+
+        state.answers.forEach((answer, itemIndex) => {
+            if (answer !== null) answered++;
+            if (answer === itemIndex) correct++;
+        });
+
+        renderWordSection(groupIndex);
+    });
+
+    showScore("ex1-score", correct, totalWords, answered);
+
+    if (scrollToScore) revealElement($("ex1-score"));
+}
+
+function resetWordSection(groupIndex, ask = false) {
+    if (ask && !window.confirm("Reset the answers in this section?")) return;
+
+    const state = wordState[groupIndex];
+
+    state.answers.fill(null);
+    state.selected = null;
+    state.checked = false;
+    state.bankOrder = shuffle(
+        wordGroups[groupIndex].items.map((_, index) => index)
+    );
+
+    const bank = $(`bank-${groupIndex}`);
+
+    state.bankOrder.forEach(itemIndex => {
+        bank.appendChild($(`word-${groupIndex}-${itemIndex}`));
+    });
+
+    invalidateWordScore();
+    renderWordSection(groupIndex);
+    updateWordProgress();
+
+    if (ask) {
+        revealElement(
+            $(`word-group-${groupIndex}`),
+            $(`word-${groupIndex}-${state.bankOrder[0]}`)
+        );
+    }
+}
+
+function resetAllWords() {
+    if (!window.confirm("Reset all answers in Word Usage?")) return;
+
+    wordGroups.forEach((_, index) => resetWordSection(index));
+    goTop();
+    announce("All Word Usage answers have been reset.");
+}
+
+/* ========================================
+   MULTIPLE CHOICE
+======================================== */
+function initMC(id) {
+    const data = mcData[id];
+    const state = mcState[id];
+
+    state.selected = Array(data.length).fill(null);
+    state.checked = Array(data.length).fill(false);
+
+    state.order = data.map(question =>
+        shuffle(question.options.map((_, index) => index))
+    );
+
+    buildMC(id);
+}
+
+function buildMC(id) {
+    const container = $(`${id}-questions`);
+    const data = mcData[id];
+    const state = mcState[id];
+
+    container.replaceChildren();
+
+    data.forEach((question, questionIndex) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `${id}-card-${questionIndex}`;
+
+        const text = document.createElement("p");
+        text.className = "question-text";
+        text.id = `${id}-question-${questionIndex}`;
+        text.textContent = `${questionIndex + 1}. ${question.text}`;
+
+        const options = document.createElement("div");
+        options.className = "options";
+        options.setAttribute("role", "radiogroup");
+        options.setAttribute("aria-labelledby", text.id);
+
+        state.order[questionIndex].forEach(optionIndex => {
+            const label = document.createElement("label");
+            label.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `${id}-q-${questionIndex}`;
+            input.value = String(optionIndex);
+
+            input.onchange = () =>
+                selectMC(id, questionIndex, optionIndex);
+
+            const optionText = document.createElement("span");
+            optionText.textContent = question.options[optionIndex];
+
+            label.append(input, optionText);
+            options.appendChild(label);
+        });
+
+        const feedback = document.createElement("div");
+        feedback.id = `${id}-feedback-${questionIndex}`;
+        feedback.className = "mc-feedback hidden";
+
+        card.append(text, options, feedback);
+        container.appendChild(card);
+        updateMCQuestion(id, questionIndex);
+    });
+
+    updateMCProgress(id);
+}
+
+function selectMC(id, questionIndex, optionIndex) {
+    mcState[id].selected[questionIndex] = optionIndex;
+    mcState[id].checked[questionIndex] = false;
+
+    $(`${id}-score`).classList.add("hidden");
+    updateMCQuestion(id, questionIndex);
+    updateMCProgress(id);
+}
+
+function updateMCQuestion(id, questionIndex) {
+    const state = mcState[id];
+    const question = mcData[id][questionIndex];
+    const selected = state.selected[questionIndex];
+    const checked = state.checked[questionIndex];
+    const card = $(`${id}-card-${questionIndex}`);
+
+    card.querySelectorAll(".option").forEach(label => {
+        const input = label.querySelector("input");
+        const optionIndex = Number(input.value);
+
+        input.checked = selected === optionIndex;
+        label.classList.remove("selected", "correct", "incorrect");
+
+        if (selected === optionIndex) label.classList.add("selected");
+
+        if (checked) {
+            if (optionIndex === 0) label.classList.add("correct");
+            if (selected === optionIndex && optionIndex !== 0) {
+                label.classList.add("incorrect");
+            }
+        }
+    });
+
+    const feedback = $(`${id}-feedback-${questionIndex}`);
+    feedback.replaceChildren();
+
+    if (!checked) {
+        feedback.className = "mc-feedback hidden";
+        return;
+    }
+
+    const correct = selected === 0;
+    feedback.className = "mc-feedback " + (correct ? "good" : "bad");
+
+    const heading = document.createElement("div");
+    heading.textContent = correct
+        ? "Correct."
+        : selected === null
+            ? `Not answered. Correct answer: ${question.options[0]}.`
+            : `Correct answer: ${question.options[0]}.`;
+
+    const explanation = document.createElement("div");
+    explanation.textContent = question.explanation;
+
+    feedback.append(heading, explanation);
+}
+
+function updateMCProgress(id) {
+    const total = mcData[id].length;
+
+    const answered = mcState[id].selected.filter(
+        answer => answer !== null
+    ).length;
+
+    $(`${id}-progress-text`).textContent = `${answered} / ${total}`;
+    $(`${id}-progress`).style.width = (answered / total * 100) + "%";
+    $(`${id}-progressbar`).setAttribute("aria-valuemax", String(total));
+    $(`${id}-progressbar`).setAttribute("aria-valuenow", String(answered));
+}
+
+function checkMC(id, scrollToScore = false) {
+    const state = mcState[id];
+    const data = mcData[id];
+
+    let correct = 0;
+    let answered = 0;
+
+    data.forEach((_, questionIndex) => {
+        state.checked[questionIndex] = true;
+
+        if (state.selected[questionIndex] !== null) answered++;
+        if (state.selected[questionIndex] === 0) correct++;
+
+        updateMCQuestion(id, questionIndex);
+    });
+
+    showScore(`${id}-score`, correct, data.length, answered);
+
+    if (scrollToScore) revealElement($(`${id}-score`));
+}
+
+function resetMC(id) {
+    if (!window.confirm(
+        "Reset this exercise and reshuffle the answer options?"
+    )) return;
+
+    initMC(id);
+    $(`${id}-score`).classList.add("hidden");
+    goTop();
+
+    announce("The exercise has been reset.");
+}
+
+/* ========================================
+   SCORES / MOBILE CONTROLS
+======================================== */
+function showScore(elementId, correct, total, answered) {
+    const element = $(elementId);
+    element.replaceChildren();
+
+    const result = document.createElement("div");
+    result.textContent =
+        `Score: ${correct} / ${total} ` +
+        `(${Math.round(correct / total * 100)}%)`;
+
+    const note = document.createElement("small");
+    note.textContent =
+        `${answered} of ${total} answered. ` +
+        "Read the feedback beside each question. " +
+        "Reset the exercise when you are ready for a fresh attempt.";
+
+    element.append(result, note);
+    element.classList.remove("hidden");
+
+    announce(
+        `${correct} out of ${total} correct. ` +
+        `${answered} questions answered.`
+    );
+}
+
+function checkCurrent() {
+    if (currentPage === "ex1") checkAllWords(true);
+    if (currentPage === "ex2" || currentPage === "ex3") {
+        checkMC(currentPage, true);
+    }
+}
+
+function jumpToNext() {
+    if (currentPage === "ex1") {
+        const unanswered = [];
+
+        wordState.forEach((state, groupIndex) => {
+            state.answers.forEach((answer, itemIndex) => {
+                if (answer === null) {
+                    unanswered.push({ groupIndex, itemIndex });
+                }
+            });
+        });
+
+        if (!unanswered.length) {
+            announce("All gaps are complete. You can check your answers.");
+            revealElement($("ex1-score").classList.contains("hidden")
+                ? $("ex1").querySelector(".action-panel")
+                : $("ex1-score"));
+            return;
+        }
+
+        const next = unanswered.find(item => {
+            const row = $(`word-row-${item.groupIndex}-${item.itemIndex}`);
+            return row.getBoundingClientRect().top > 90;
+        }) || unanswered[0];
+
+        const state = wordState[next.groupIndex];
+
+        // Show the bank if no word is selected; otherwise show the gap.
+        if (state.selected === null) {
+            revealElement(
+                $(`word-group-${next.groupIndex}`),
+                $(`word-${next.groupIndex}-${state.bankOrder.find(
+                    index => !state.answers.includes(index)
+                )}`)
+            );
+        } else {
+            revealElement(
+                $(`word-row-${next.groupIndex}-${next.itemIndex}`),
+                $(`blank-${next.groupIndex}-${next.itemIndex}`)
+            );
+        }
+
+        announce(
+            `Section ${next.groupIndex + 1}, ` +
+            `gap ${next.itemIndex + 1} is unanswered.`
+        );
+
+        return;
+    }
+
+    if (currentPage === "ex2" || currentPage === "ex3") {
+        const id = currentPage;
+
+        const unanswered = mcState[id].selected
+            .map((answer, index) => answer === null ? index : -1)
+            .filter(index => index !== -1);
+
+        if (!unanswered.length) {
+            announce("All questions are answered. You can check your answers.");
+            revealElement($(id).querySelector(".action-panel"));
+            return;
+        }
+
+        const nextIndex = unanswered.find(index =>
+            $(`${id}-card-${index}`).getBoundingClientRect().top > 90
+        );
+
+        const index = nextIndex === undefined ? unanswered[0] : nextIndex;
+        const card = $(`${id}-card-${index}`);
+
+        revealElement(card, card.querySelector("input"));
+        announce(`Question ${index + 1} is unanswered.`);
+    }
+}
+
+/* ========================================
+   INITIALISE
+======================================== */
+$("menu-ex1-count").textContent =
+    `${wordGroups.length} short sections · ${totalWords} questions · All target vocabulary`;
+
+$("menu-ex2-count").textContent =
+    `${voiceQuestions.length} questions · Shuffled options · Bilingual explanations`;
+
+$("menu-ex3-count").textContent =
+    `${formQuestions.length} questions · Modals / infinitives / -ing forms`;
+
+initBackground();
+buildWordSections();
+initMC("ex2");
+initMC("ex3");
+</script>
+</body>
+</html>
